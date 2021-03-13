@@ -30,6 +30,7 @@ const { withAuth } = createAuth({
     async sendToken(args) {
       console.log(args);
     },
+    tokensValidForMins: 10,
   },
 });
 
