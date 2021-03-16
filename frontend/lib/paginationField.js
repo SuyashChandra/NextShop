@@ -4,7 +4,6 @@ export default function paginatinField() {
   return {
     keyArgs: false, // tells apollo, we will take care of everything
     read(existing = [], { args, cache }) {
-      console.log({ existing, args, cache });
       const { skip, first } = args;
 
       // Read the number of items on the page from the cache
@@ -42,12 +41,10 @@ export default function paginatinField() {
     merge(existing, incoming, { args }) {
       const { skip, first } = args;
       // This runs when the apollo client comes back form the network with our product
-      console.log(`Merging itms form the network ${incoming.length}`);
       const merged = existing ? existing.slice(0) : [];
       for (let i = skip; i < skip + incoming.length; ++i) {
         merged[i] = incoming[i - skip];
       }
-      console.log(merged);
       // Finally we return the merged items from the cache
       return merged;
     },
